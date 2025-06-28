@@ -1,4 +1,4 @@
-package com.deliverytech.delivery_api.entity;
+package com.deliverytech.delivery.entity;
 
 import java.time.LocalDateTime;
 

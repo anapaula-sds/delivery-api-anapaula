@@ -1,10 +1,10 @@
-package com.deliverytech.delivery_api.repository;
+package com.deliverytech.delivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.deliverytech.delivery_api.entity.Pedido;
+import com.deliverytech.delivery.entity.Pedido;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     // Buscar por status (ex: PENDENTE, ENTREGUE)
-    List<Pedido> findByStatusIgnoreCase(String status);
+    List<Pedido> findByStatus(String status);
 
     // Buscar pedidos por cliente
     List<Pedido> findByClienteId(Long clienteId);

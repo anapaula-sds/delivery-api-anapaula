@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deliverytech.delivery.service.ClienteService;
-import com.deliverytech.delivery.model.Cliente;
+import com.deliverytech.delivery.entity.Cliente;
+import com.deliverytech.delivery.services.ClienteService;
+
 
 
 @RestController

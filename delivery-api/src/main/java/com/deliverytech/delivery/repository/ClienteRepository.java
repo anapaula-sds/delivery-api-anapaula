@@ -1,7 +1,8 @@
-package com.deliverytech.delivery_api.repository;
+package com.deliverytech.delivery.repository;
 
 import org.springframework.stereotype.Repository;
-import com.deliverytech.delivery_api.entity.Cliente;
+
+import com.deliverytech.delivery.entity.Cliente;
 
 import java.util.List;
 import java.util.Optional;

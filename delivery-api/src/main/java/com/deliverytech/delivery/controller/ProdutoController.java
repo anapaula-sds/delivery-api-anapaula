@@ -1,15 +1,17 @@
 package com.deliverytech.delivery.controller;
 
-import com.deliverytech.delivery.model.Produto;
-import com.deliverytech.delivery.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
+import com.deliverytech.delivery.entity.Produto;
+import com.deliverytech.delivery.services.ProdutoService;
+
 import java.util.List;
 import java.util.Optional;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produtos")

@@ -1,7 +1,5 @@
 package com.deliverytech.delivery.controller;
 
-import com.deliverytech.delivery.model.Restaurante;
-import com.deliverytech.delivery.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -10,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
+import com.deliverytech.delivery.entity.Restaurante;
+import com.deliverytech.delivery.services.RestauranteService;
 
 @RestController
 @RequestMapping("/restaurantes")

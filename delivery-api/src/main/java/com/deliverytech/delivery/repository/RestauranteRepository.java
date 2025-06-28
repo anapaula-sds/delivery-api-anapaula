@@ -1,10 +1,10 @@
-package com.deliverytech.delivery_api.repository;
+package com.deliverytech.delivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.deliverytech.delivery_api.entity.Restaurante;
+import com.deliverytech.delivery.entity.Restaurante;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.deliverytech.delivery_api.services;
+package com.deliverytech.delivery.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.deliverytech.delivery_api.entity.Cliente;
-import com.deliverytech.delivery_api.repository.ClienteRepository;
+import com.deliverytech.delivery.entity.Cliente;
+import com.deliverytech.delivery.repository.ClienteRepository;
+
 
 @Service
 @Transactional
