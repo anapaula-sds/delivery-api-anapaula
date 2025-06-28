@@ -1,32 +1,13 @@
-spring.application.name=delivery-api
-# Configuração do servidor
-server.port=8080
+package com.deliverytech.delivery_api;
 
-# Configuração do H2 Database
-spring.datasource.url=jdbc:h2:mem:deliverydb
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-# Console H2
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-#
-# JPA/Hibernate
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
+@SpringBootApplication
+public class DeliveryApiApplication {
 
-# Configurações de desenvolvimento
-spring.devtools.restart.enabled=true
+	public static void main(String[] args) {
+		SpringApplication.run(DeliveryApiApplication.class, args);
+	}
 
-# Configurações específicas para JDK 21
-spring.jpa.open-in-view=false
-logging.level.org.springframework.web=DEBUG
-
-# Executar scripts SQL automaticamente
-spring.sql.init.mode=always
-spring.sql.init.data-locations=classpath:data.sql
-spring.sql.init.schema-locations=classpath:schema.sql
-
+}
