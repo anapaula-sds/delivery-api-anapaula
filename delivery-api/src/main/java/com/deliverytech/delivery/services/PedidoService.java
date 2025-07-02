@@ -1,98 +1,86 @@
 package com.deliverytech.delivery.services;
 
 import java.util.List;
-import java.util.Optional;
 
+import com.deliverytech.delivery.entity.PedidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.deliverytech.delivery.entity.Cliente;
 import com.deliverytech.delivery.entity.Pedido;
+import com.deliverytech.delivery.entity.Restaurante;
+import com.deliverytech.delivery.enums.StatusPedido;
+import com.deliverytech.delivery.repository.ClienteRepository;
 import com.deliverytech.delivery.repository.PedidoRepository;
+//import com.deliverytech.delivery.repository.ProdutoRepository;
+import com.deliverytech.delivery.repository.RestauranteRepository;
 
 @Service
-@Transactional
 public class PedidoService {
-
+    
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Pedido cadastrar(Pedido pedido) {
-        validarDadosPedido(pedido);
-        pedido.setStatus("PENDENTE"); // Status padrão
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private RestauranteRepository restauranteRepository;
+
+
+    /**
+     * Criar novo pedido
+     */
+    public Pedido criarPedido(PedidoDTO dto) {
+        Cliente cliente = clienteRepository.findById(dto.getClienteId())
+            .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado: " + dto.getClienteId()));
+
+        Restaurante restaurante = restauranteRepository.findById(dto.getRestauranteId())
+            .orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado: " + dto.getRestauranteId()));
+
+        if (!cliente.getAtivo()) {
+            throw new IllegalArgumentException("Cliente inativo não pode fazer pedidos");
+        }
+
+        if (!restaurante.getAtivo()) {
+            throw new IllegalArgumentException("Restaurante não está disponível");
+        }
+
+        Pedido pedido = new Pedido();
+        pedido.setClienteId(cliente.getId());
+        pedido.setRestaurante(restaurante);
+        pedido.setStatus(StatusPedido.PENDENTE.name());
+        pedido.setDataPedido(dto.getDataPedido());
+        pedido.setNumeroPedido(dto.getNumeroPedido());
+        pedido.setValorTotal(dto.getValorTotal());
+        pedido.setObservacoes(dto.getObservacoes());
+        pedido.setItens(dto.getItens());
+
         return pedidoRepository.save(pedido);
     }
 
-    @Transactional(readOnly = true)
-    public List<Pedido> listarTodos() {
-        return pedidoRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Pedido> buscarPorId(Long id) {
-        return pedidoRepository.findById(id);
-    }
-
-    @Transactional
-    public Pedido atualizar(Long id, Pedido pedidoAtualizado) {
-        Pedido pedidoExistente = pedidoRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Pedido com ID " + id + " não encontrado."));
-
-        // Atualize os campos necessários:
-        pedidoExistente.setStatus(pedidoAtualizado.getStatus());
-
-
-        return pedidoRepository.save(pedidoExistente);
-    }
-
-    @Transactional
-    public void excluir(Long id) {
-        Pedido pedido = pedidoRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Pedido com ID " + id + " não encontrado."));
-
-        pedidoRepository.delete(pedido);
-    }
-
+    /**
+     * Listar pedidos por cliente
+     */
     @Transactional(readOnly = true)
     public List<Pedido> listarPorCliente(Long clienteId) {
-        return pedidoRepository.findByClienteId(clienteId);
+        return pedidoRepository.findByClienteIdOrderByDataPedidoDesc(clienteId);
     }
 
-    @Transactional(readOnly = true)
-    public List<Pedido> listarPorRestaurante(Long restauranteId) {
-        return pedidoRepository.findByRestauranteId(restauranteId);
-    }
+    /**
+     * Atualizar status do pedido
+     */
+    public Pedido atualizarStatus(Long pedidoId, StatusPedido status) {
+        Pedido pedido = pedidoRepository.findById(pedidoId)
+            .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + pedidoId));
 
-    @Transactional(readOnly = true)
-    public List<Pedido> listarPorStatus(String status) {
-        return pedidoRepository.findByStatus(status);
-    }
+        if (pedido.getStatus().equals(StatusPedido.ENTREGUE.name())) {
+            throw new IllegalArgumentException("Pedido já finalizado: " + pedidoId);
+        }
 
-    public Pedido atualizarStatus(Long id, String novoStatus) {
-        Pedido pedido = buscarPorId(id)
-            .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + id));
-
-        pedido.setStatus(novoStatus);
+        pedido.setStatus(status.name());
         return pedidoRepository.save(pedido);
     }
-
-    @Transactional(readOnly = true)
-    public List<Pedido> buscarPorStatus(String status) {
-        List<Pedido> pedidos = pedidoRepository.findByStatus(status);
-
-        if (pedidos.isEmpty()) {
-            throw new IllegalArgumentException("Nenhum pedido encontrado com o status: " + status);
-        }
-
-        return pedidos;
-    }
-
-    private void validarDadosPedido(Pedido pedido) {
-        if (pedido.getNumeroPedido() == null || pedido.getNumeroPedido().isBlank()) {
-            throw new IllegalArgumentException("Número do pedido é obrigatório");
-        }
-        if (pedido.getClienteId() == null || pedido.getRestauranteId() == null) {
-            throw new IllegalArgumentException("Cliente e restaurante são obrigatórios");
-        }
-    }
+    
 }

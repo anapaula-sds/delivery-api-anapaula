@@ -7,15 +7,10 @@ import com.deliverytech.delivery.entity.Produto;
 
 import java.util.List;
 
+
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-
-    // Buscar produtos disponíveis
-    List<Produto> findByDisponivelTrue();
-
-    // Buscar produtos por categoria (case insensitive)
-    List<Produto> findByCategoriaContainingIgnoreCase(String categoria);
-
-    // Buscar produtos de um restaurante específico
-    List<Produto> findByRestauranteId(Long restauranteId);
+public interface ProdutoRepository extends JpaRepository <Produto, Long> {
+    // buscar produto por restaurante ID
+     List<Produto> findByRestauranteId(Long restauranteId);
+    
 }

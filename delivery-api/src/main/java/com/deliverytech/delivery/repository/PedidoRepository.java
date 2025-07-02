@@ -1,26 +1,28 @@
 package com.deliverytech.delivery.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
-import com.deliverytech.delivery.entity.Pedido;
-
+//import java.math.BigDecimal;
+//import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+//import com.deliverytech.delivery.entity.Cliente;
+import com.deliverytech.delivery.entity.Pedido;
+//import com.deliverytech.delivery.enums.StatusPedido;
+
 @Repository
-public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+public interface PedidoRepository extends JpaRepository <Pedido, Long> {
 
-    // Buscar por status (ex: PENDENTE, ENTREGUE)
-    List<Pedido> findByStatus(String status);
+    // Buscar pedidos por cliente ID
+    List<Pedido> findByClienteIdOrderByDataPedidoDesc(Long clienteId);
 
-    // Buscar pedidos por cliente
-    List<Pedido> findByClienteId(Long clienteId);
+    // Buscar por número do pedido
+    Pedido findByNumeroPedido(String numeroPedido);
 
-    // Buscar pedidos por restaurante
-    List<Pedido> findByRestauranteId(Long restauranteId);
+    //Buscar pedidos por restaurante ID
+    List<Pedido> findByRestauranteIdOrderByDataPedidoDesc(Long restauranteId);
 
-    // Contar pedidos com status específico
-    @Query("SELECT COUNT(p) FROM Pedido p WHERE LOWER(p.status) = LOWER(:status)")
-    Long countByStatus(String status);
 }
