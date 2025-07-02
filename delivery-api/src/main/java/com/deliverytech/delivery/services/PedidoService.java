@@ -1,8 +1,9 @@
 package com.deliverytech.delivery.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.deliverytech.delivery.entity.PedidoDTO;
+import com.deliverytech.delivery.dto.PedidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import com.deliverytech.delivery.entity.Restaurante;
 import com.deliverytech.delivery.enums.StatusPedido;
 import com.deliverytech.delivery.repository.ClienteRepository;
 import com.deliverytech.delivery.repository.PedidoRepository;
-//import com.deliverytech.delivery.repository.ProdutoRepository;
+import com.deliverytech.delivery.repository.ProdutoRepository;
 import com.deliverytech.delivery.repository.RestauranteRepository;
 
 @Service
@@ -28,6 +29,8 @@ public class PedidoService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     /**
      * Criar novo pedido
@@ -82,5 +85,22 @@ public class PedidoService {
         pedido.setStatus(status.name());
         return pedidoRepository.save(pedido);
     }
-    
+    // Pedidos por cliente
+    public List<Pedido> buscarPedidosPorCliente(Long clienteId) {
+        return pedidoRepository.findByClienteId(clienteId);
+    }
+    // listar por status
+    public List<Pedido> listarPorStatus(StatusPedido status) {
+        return pedidoRepository.findByStatus(status);
+    }
+    // Listar os 10 pedidos mais recentes
+    public List<Pedido> listarRecentes() {
+        return pedidoRepository.findTop10ByOrderByDataPedidoDesc();
+    }
+    /**
+     * Listar pedidos por período
+     */
+    public List<Pedido> listarPorPeriodo(LocalDateTime inicio, LocalDateTime fim) {
+        return pedidoRepository.findByDataPedidoBetween(inicio, fim);
+    }
 }

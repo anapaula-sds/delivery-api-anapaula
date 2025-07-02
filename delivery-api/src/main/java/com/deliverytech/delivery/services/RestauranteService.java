@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-//import com.deliverytech.delivery.repository.PedidoRepository;
-//import com.deliverytech.delivery.repository.ProdutoRepository;
+import com.deliverytech.delivery.projection.RelatorioVendas;
+import com.deliverytech.delivery.repository.PedidoRepository;
+import com.deliverytech.delivery.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.deliverytech.delivery.entity.Restaurante;
 import com.deliverytech.delivery.repository.RestauranteRepository;
 
-import com.deliverytech.delivery.entity.RestauranteDTO;
+import com.deliverytech.delivery.dto.RestauranteDTO;
 
 @Service
 public class RestauranteService {
@@ -22,7 +23,11 @@ public class RestauranteService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     /**
      * Cadastrar novo restaurante
@@ -156,5 +161,17 @@ public class RestauranteService {
         Restaurante restaurante = buscarPorId(id)
             .orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado: " + id));
         restauranteRepository.delete(restaurante);
+    }
+
+    public List<Restaurante> buscarPorTaxaEntregaMenorOuIgual(BigDecimal taxa) {
+        return restauranteRepository.findByTaxaEntregaLessThanEqual(taxa);
+    }
+
+    public List<Restaurante> buscarTop5PorNomeAsc() {
+        return restauranteRepository.findTop5ByOrderByNomeAsc();
+    }
+
+    public List<RelatorioVendas> relatorioVendasPorRestaurante() {
+        return restauranteRepository.relatorioVendasPorRestaurante();
     }
 }

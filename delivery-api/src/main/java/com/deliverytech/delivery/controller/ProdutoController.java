@@ -6,10 +6,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.deliverytech.delivery.entity.Produto;
-//import com.deliverytech.delivery.entity.Restaurante;
+import com.deliverytech.delivery.entity.Restaurante;
 import com.deliverytech.delivery.services.ProdutoService;
 
-//import java.math.BigDecimal;
+import java.math.BigDecimal;
 
 
 @RestController
@@ -102,6 +102,37 @@ public class ProdutoController {
     public ResponseEntity<?> buscarPorRestaurante(@PathVariable Long restauranteId) {
         try {
             return ResponseEntity.ok(produtoService.buscarPorRestaurante(restauranteId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erro interno do servidor");
+        }
+    }
+
+    // Apenas produtos disponíveis
+    @GetMapping("/disponiveis")
+    public ResponseEntity<?> listarDisponiveis() {
+        try {
+            return ResponseEntity.ok(produtoService.buscarDisponiveis());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erro interno do servidor");
+        }
+    }
+    // Produtos por categoria
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<?> buscarPorCategoria(@PathVariable String categoria) {
+        try {
+            return ResponseEntity.ok(produtoService.buscarPorCategoria(categoria));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erro interno do servidor");
+        }
+    }
+    // Produtos por faixa de preço (menor ou igual)
+    @GetMapping("/preco/{preco}")
+    public ResponseEntity<?> buscarPorPreco(@PathVariable BigDecimal preco) {
+        try {
+            return ResponseEntity.ok(produtoService.buscarPorFaixaDePreco(preco));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Erro interno do servidor");
