@@ -2,8 +2,9 @@ package com.deliverytech.delivery.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-//import com.deliverytech.delivery.enums.StatusPedido;
+import com.deliverytech.delivery.enums.StatusPedido;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "pedidos")
+@Table(name = "pedido")
 public class Pedido {
     
     @Id
@@ -34,13 +35,21 @@ public class Pedido {
 
     private String observacoes;
 
-    @Column(name = "cliente_id")
-    private Long clienteId;
+    @Column(name = "endereco_entrega")
+    private String enderecoEntrega;
+
+    @Column(name = "taxa_entrega")
+    private BigDecimal taxaEntrega;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<ItemPedido> itens;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante;
-
-    private String itens;
 
 }

@@ -1,0 +1,28 @@
+[33md8ffdca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m5756507[m HEAD@{1}: reset: moving to HEAD~1
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{2}: checkout: moving from entrega-3 to main
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{3}: checkout: moving from entrega-3 to entrega-3
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{4}: checkout: moving from entrega-3 to entrega-3
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{5}: checkout: moving from entrega-3 to entrega-3
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{6}: checkout: moving from entrega-3 to entrega-3
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{7}: checkout: moving from entrega-2 to entrega-3
+[33m7a58de1[m[33m ([m[1;31morigin/entrega-3[m[33m, [m[1;31morigin/entrega-2[m[33m, [m[1;32mentrega-3[m[33m, [m[1;32mentrega-2[m[33m)[m HEAD@{8}: commit: :sparkles: Final Entrega 2
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{9}: checkout: moving from entrega-2 to entrega-2
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{10}: checkout: moving from entrega-2 to entrega-2
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{11}: checkout: moving from entrega-1 to entrega-2
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{12}: checkout: moving from entrega-1 to entrega-1
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{13}: checkout: moving from entrega-1 to entrega-1
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{14}: checkout: moving from main to entrega-1
+[33mc31517c[m[33m ([m[1;31morigin/entrega-1[m[33m, [m[1;32mentrega-1[m[33m)[m HEAD@{15}: commit: :sparkles: Preparação do código para Entrega 1
+[33m5756507[m HEAD@{16}: commit (amend): :bug: Correção de alguns Bugs no Código para Rodar sem erros
+[33m2f2f418[m HEAD@{17}: commit: :bugfix: Correção de alguns Bugs no Código para Rodar sem erros
+[33md8ffdca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{18}: commit: :bug: Correção da DeliveryApiApplication.java
+[33m40fa883[m HEAD@{19}: commit: :Sparkles: Inclusão dos códigos de PedidoController, ProdutoController e ReaturanteController na Classe Controller e CRUD completo
+[33m5b039d8[m HEAD@{20}: reset: moving to HEAD~1
+[33m17fa440[m HEAD@{21}: reset: moving to HEAD
+[33m17fa440[m HEAD@{22}: commit: :sparkles: Inclusão dos códigos de PedidoController, ProdutoController e RestauranteController na Classe Controller
+[33m5b039d8[m HEAD@{23}: commit: :sparkles: Inclusão do código do PedidoService, ProdutoService e RestauranteService na camada Service
+[33m41aabd6[m HEAD@{24}: commit: :sparkles: Inclusão dos códigos da interfaces PedidoRepository.java, ProdutoRepository.java e RestauranteRepository.java
+[33m1d27f1d[m HEAD@{25}: commit: :sparkles: Atualização do application.properties e Inclusão do sata.sql e schema.sql
+[33m056c938[m HEAD@{26}: reset: moving to HEAD
+[33m056c938[m HEAD@{27}: clone: from https://github.com/anapaula-sds/delivery-api-anapaula.git
